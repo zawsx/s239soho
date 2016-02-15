@@ -1,0 +1,620 @@
+<!DOCTYPE html><!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]--><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Commercial Working Group  | Soho Dashboard</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
+<link href="css/dash-style.css" media="screen" rel="stylesheet" />
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script src="js/dashboard.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?region=GB"></script></head>
+<body class="brochure nojs"><script type="text/javascript">$("body").removeClass("nojs");</script>
+	<div class="row container" id="siteheader">
+		<div class="twelve column">
+			<ol><li><a href="#">CWG</a></li>
+				<li><a href="#">Sections</a></li>
+				<li><a href="#">Westminster Overview</a></li></ol></div></div>
+    <div id="out-of-spec">Sorry, we don't support your browser. Some features may not function or display as we intended. <br/>
+  Please upgrade to at least Internet Explorer 8 (preferably version 10) or the latest version of Chrome/Safari/Firefox.
+</div>
+    <article class="dashboard" id="local-authority-dash">
+      <div id="gradwrapper" class="neverhide"><!-- yielded template will close this -->
+<!-- <section><div class="row container"><div class="eight columns"><h1 class='authority-name'>Westminster</h1></div></div></section>-->
+<section><nav class="container">
+		<ul class="tabs"><li><a id="default_tab" href="#housing"  class="housing">Housing</a>
+      <li><a href="#finance" class="finance">Finance</a>
+			<li><a href="#deprivation" class="deprivation">Deprivation</a>
+      <li><a  href="#wellbeing" class="wellbeing"><span></span>Wellbeing</a></li>
+			<li><a href="#geo" class="geo">Geography</a></ul></nav></section>
+</div><!-- close #gradwrapper -->
+<section id="housing" class="tabbed">
+        <div class="row container">
+            <div class="one-third column tableau introduction">
+              <div class= "titlerow"><h4 class="title">Housing</h4>
+                <p class="description">
+                    These graphs illustrate a selection of governement data on housing-related statistics and show how Westminster compares with other local authorities in England.</p></div> </div>
+            <!-- note: this doesn't happen via ajax' -->
+<div class="one-third column tableau households-2008">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript"> // when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"households-2008","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=households-2008\u0026partial=tableau_distro\u0026section=housing"}
+      );
+      var currentTab = $('.tableau.households-2008').closest('.tabbed');// grab the current tab.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();} // if it's visible when we start, just do the ajax get.
+      // when tab is clicked, if it's for the section that this tableau lives on, get tableau via ajax (if we haven't already)
+      $('.tabs a.housing').bind('click', function(e){tableau.doAjaxOnce(); });
+    });</script></div>
+<div class="one-third column tableau homelessness-acceptances-per-1000">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript"> // when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"homelessness-acceptances-per-1000","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=homelessness-acceptances-per-1000\u0026partial=tableau_distro\u0026section=housing"}   );
+      var currentTab = $('.tableau.homelessness-acceptances-per-1000').closest('.tabbed'); // grab the current tab.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();} // if it's visible when we start, just do the ajax get.
+      // when tab is clicked, if it's for the section that this tableau lives on, get tableau via ajax (if we haven't already)
+      $('.tabs a.housing').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>        </div>
+        <div class="row container">
+<div class="one-third column tableau households-accommodated-per-1000">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript"> // when the page is ready, start loading the graph by ajax.
+    $(function(){ // make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"households-accommodated-per-1000","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=households-accommodated-per-1000\u0026partial=tableau_distro\u0026section=housing"}
+      );
+      var currentTab = $('.tableau.households-accommodated-per-1000').closest('.tabbed'); // grab the current tab.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce(); } // if it's visible when we start, just do the ajax get.
+      // when tab is clicked, if it's for the section that this tableau lives on, get tableau via ajax (if we haven't already)
+      $('.tabs a.housing').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>
+<div class="one-third column tableau net-additional-dwellings">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript"> // when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"net-additional-dwellings","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=net-additional-dwellings\u0026partial=tableau_distro\u0026section=housing"}
+      );
+      var currentTab = $('.tableau.net-additional-dwellings').closest('.tabbed');// grab the current tab.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();} // if it's visible when we start, just do the ajax get.
+      // when tab is clicked, if it's for the section that this tableau lives on, get tableau via ajax (if we haven't already)
+      $('.tabs a.housing').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>
+<div class="one-third column tableau additional-affordable-dwellings">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"additional-affordable-dwellings","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=additional-affordable-dwellings\u0026partial=tableau_distro\u0026section=housing"}
+      );
+      var currentTab = $('.tableau.additional-affordable-dwellings').closest('.tabbed');// grab the current tab.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();} // if it's visible when we start, just do the ajax get.
+      // when tab is clicked, if it's for the section that this tableau lives on, get tableau via ajax (if we haven't already)
+      $('.tabs a.housing').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>
+
+        </div>
+        <div class="row container">
+            <div class="one-third column tableau key" style="margin-top:24px; padding-bottom:24px;">
+    <div class= "titlerow"><h4 class="title">Key to figures</h4>
+  <p class="description">The curve shows the national distibution. Hover over the graph for limit values.</p></div>
+<div> <div class="bignumber"><h2>value</h2><h3>shown by large arrow</h3></div></div>
+<div class="distribution legend"><noscript> JavaScript is required to view the charts.</noscript>
+  <div class="tip min" style="display:none;"></div>?  <div class="tip max" style="display:none;"></div>?</div>
+  <div class="average">  National average:    <strong>shown by smaller arrow</strong></div>
+<script type='text/javascript'> // runs on document ready.
+  $(function(){ // draw the distribution for this value
+    var distro = new ODC.Distribution('legend',
+      {"max":406000.0,"min":1000.0,"mean":"66596.923077","distribution":[["-19452.500000",0],["21452.500000",95],["62357.500000",145],["103262.500000",57],["144167.500000",17],["185072.500000",6],["225977.500000",3],["266882.500000",0],["307787.500000",0],["348692.500000",1],["389597.500000",1],["430502.500000",0]],"heading":"Key to figures","context":"shown by large arrow","description":"The curve shows the national distibution. Hover over the graph for limit values.","sourcelink":"\"#\"","quantity":"100000","format_str":"%6.0f"},
+      true, // annotate?
+      {});
+
+    function draw(){distro.drawDistribution(); distro.addValueLine('100000.0');}
+    draw();
+    $(window).bind('resizestop', function (e) {distro.reInit(); draw();});
+    // Also, when tabbing to this tab, redraw the distribution curves.
+    // This fixes the case where the draw happens when the tab is not visible (by tabbing away during ajax get), in which case it thinks the width is 0!
+    $('.tabs a.housing').bind('click', function(e){distro.reInit(); draw();  });  });</script></div></div></section>
+<section id="finance" class="tabbed"><div class="row container">
+	<div class="one-third column tableau introduction"><div class= "titlerow"><h4 class="title">Finance</h4>
+	<p class="description">These graphs illustrate a selection of data on local government finance, showing the 2011-12 budget for spending in Westminster on a range of services.  </p>
+	<p class="description"><em>NB: The minimum, maximum and mean values, as well as the distribution are calculated based only on authorities of the same type (i.e. in this case, <strong>London Borough Councils</strong>). Per-household figures are calculated using the 2008 figure for number of households.</em></p></div></div>
+<div class="one-third column tableau finance-699">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-699","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-699\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-699').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();}
+
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){
+        tableau.doAjaxOnce();
+      });
+    });
+</script>
+</div>
+
+              
+
+<div class="one-third column tableau finance-490">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">
+
+    // when the page is ready, start loading the graph by ajax.
+    $(function(){
+      // make a tableau object.
+      var tableau = new ODC.Tableau(
+        // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-490","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-490\u0026partial=tableau_distro\u0026section=finance"}
+      );
+
+      // grab the current tab.
+      var currentTab = $('.tableau.finance-490').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){
+        tableau.doAjaxOnce();
+      }
+
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){
+        tableau.doAjaxOnce();
+      });
+    });
+</script>
+</div>
+
+      </div>
+
+      <div class="row container">
+              
+
+<div class="one-third column tableau finance-509">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">
+
+    // when the page is ready, start loading the graph by ajax.
+    $(function(){
+      // make a tableau object.
+      var tableau = new ODC.Tableau(
+        // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-509","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-509\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-509').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){
+        tableau.doAjaxOnce();
+      }
+
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){
+        tableau.doAjaxOnce();
+      });
+    });
+</script>
+</div>
+
+<div class="one-third column tableau finance-590">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){
+      // make a tableau object.
+      var tableau = new ODC.Tableau(
+        // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-590","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-590\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-590').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){        tableau.doAjaxOnce();      }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){        tableau.doAjaxOnce();      });    });
+</script></div>
+<div class="one-third column tableau finance-599"><div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){      // make a tableau object.
+      var tableau = new ODC.Tableau(        // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-599","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-599\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-599').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){        tableau.doAjaxOnce();      }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){        tableau.doAjaxOnce();      });    });</script></div> </div>
+      <div class="row container">
+<div class="one-third column tableau finance-690">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-690","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-690\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-690').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce(); }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>
+<div class="one-third column tableau finance-290">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-290","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-290\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-290').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();}
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){tableau.doAjaxOnce();   });    });</script></div>
+<div class="one-third column tableau finance-190">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-190","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-190\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-190').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){  tableau.doAjaxOnce(); }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>      </div>
+      <div class='row container'>
+<div class="one-third column tableau finance-390">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){ // make a tableau object.
+      var tableau = new ODC.Tableau( // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"finance-390","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=finance-390\u0026partial=tableau_distro\u0026section=finance"}
+      );
+      var currentTab = $('.tableau.finance-390').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){ tableau.doAjaxOnce();  }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.finance').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>     </div></section>
+
+<section id="deprivation" class="tabbed">
+    <div class="row container">
+        <div class="one-third column tableau introduction">
+          <div class= "titlerow">
+            <h4 class="title">Deprivation</h4>
+            <p class="description">The English Indices of Deprivation provide a relative measure of deprivation at neighbourhood (lower layer super output area, or 'LSOA') level. Areas are ranked from least deprived to most deprived on seven different dimensions of deprivation (including income and employment deprivation) and an overall measure called the Index of Multiple Deprivation.</p>
+            <p class="description">The Indices are designed for small areas, but one way of summarising relative deprivation at local authority district (LAD) level is by calculating the average rank of the LSOAs within the LAD (<a href="http://opendatacommunities-downloads.s3.amazonaws.com/IMD-2010-LA-domain-summaries.xls" target="_blank">download average rank data in Excel format</a>). The LADs are ranked according to the average rank of their LSOAs, from 1 to 326 where 1 is the most deprived.</p>
+            <p class="description">
+              See also the <a href="http://opendatacommunities.org/resource?uri=http%3A%2F%2Fopendatacommunities.org%2Fdef%2Fconcept%2Ffolders%2Fthemes%2Fsocietal-wellbeing" target="_blank">datasets</a>, or browse deprivation data on an <a href="http://opendatacommunities.org/showcase/deprivation" target="_blank">interactive map</a>. </p>  </div>  </div>
+        <div class="one-third column tableau imd-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-rank-la').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();}
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce(); }); });</script></div>
+
+        <div class="one-third column tableau imd-income-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript"> // when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-income-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-income-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-income-rank-la').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce(); }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce();  });    });</script></div></div>
+    <div class="row container">
+        <div class="one-third column tableau imd-employment-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-employment-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-employment-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-employment-rank-la').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce(); }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce(); });    });</script></div>
+
+        <div class="one-third column tableau imd-health-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-health-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-health-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-health-rank-la').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce(); }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce();  });    });</script></div>
+
+        <div class="one-third column tableau imd-education-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-education-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-education-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-education-rank-la').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();  }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce();  });    });</script></div></div>
+    <div class="row container">
+        <div class="one-third column tableau imd-housing-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-housing-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-housing-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-housing-rank-la').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce(); }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce();  });    });</script></div>
+        <div class="one-third column tableau imd-crime-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-crime-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-crime-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-crime-rank-la').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce(); }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce();   });    });</script></div>
+
+        <div class="one-third column tableau imd-environment-rank-la">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"imd-environment-rank-la","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=imd-environment-rank-la\u0026partial=tableau_deciles\u0026section=deprivation"}
+      );
+      var currentTab = $('.tableau.imd-environment-rank-la').closest('.tabbed');// grab the current tab.
+
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();}
+
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.deprivation').bind('click', function(e){tableau.doAjaxOnce();  });    });</script></div></div></section>
+
+<script type="text/javascript">console.log('wiring legend')
+  $(function() {// wire up all future a.legends to the click (deprivation)
+    $(document).on("click", "#deprivation a.distro-legend", function(e) {e.preventDefault();
+      $("#splash").dialog({ modal: true, width: 320, title: "Legend"}); // width allows for ui dialog padding
+      $("#splash").html("<div class=\"one-third column tableau key\" style=\"margin-top:24px; padding-bottom:24px;\">\n    <div class= \"titlerow\">\n  <h4 class=\"title\">Key to figures<\/h4>\n  <p class=\"description\">\n    The curve shows the national distibution. Hover over the graph for limit values.\n  <\/p>\n<\/div>\n<div>\n  <div class=\"bignumber\">\n        <h2>value<\/h2>\n      <h3>shown by large arrow<\/h3>\n  <\/div>\n<\/div>\n<div class=\"distribution legend\">\n  <noscript>\n    JavaScript is required to view the charts.\n  <\/noscript>\n  <div class=\"tip min\" style=\"display:none;\"><\/div>?\n  <div class=\"tip max\" style=\"display:none;\"><\/div>?\n<\/div><div class=\"average\">\n  National average:\n    <strong>shown by smaller arrow<\/strong>\n<\/div>\n\n\n<script type=\'text/javascript\'>\n  // runs on document ready.\n  $(function(){\n\n    // draw the distribution for this value\n    var distro = new ODC.Distribution(\n      \'legend\',\n      {\"max\":406000.0,\"min\":1000.0,\"mean\":\"66596.923077\",\"distribution\":[[\"-19452.500000\",0],[\"21452.500000\",95],[\"62357.500000\",145],[\"103262.500000\",57],[\"144167.500000\",17],[\"185072.500000\",6],[\"225977.500000\",3],[\"266882.500000\",0],[\"307787.500000\",0],[\"348692.500000\",1],[\"389597.500000\",1],[\"430502.500000\",0]],\"heading\":\"Key to figures\",\"context\":\"shown by large arrow\",\"description\":\"The curve shows the national distibution. Hover over the graph for limit values.\",\"sourcelink\":\"\\\"#\\\"\",\"quantity\":\"100000\",\"format_str\":\"%6.0f\"},\n      true, // annotate?\n      {});\n\n    function draw(){\n      distro.drawDistribution();\n      distro.addValueLine(\'100000.0\');\n    }\n\n    draw();\n\n    $(window).bind(\'resizestop\', function (e) {\n       distro.reInit();\n       draw();\n    });\n\n    // Also, when tabbing to this tab, redraw the distribution curves.\n    // This fixes the case where the draw happens when the tab is not visible (by tabbing away during ajax get), in which case it thinks the width is 0!\n    $(\'.tabs a.legend\').bind(\'click\', function(e){\n       distro.reInit();\n       draw();\n    });\n  });\n<\/script>\n\n\n<\/div>");    });  });</script>
+<section id="wellbeing" class="tabbed">
+    <div class="row container">
+      <div class="tab-warning sixteen columns"><p class="description">Note: Wellbeing data is published at county-level.
+          Displaying data from <a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london/inner-london#wellbeing" target="_blank">Inner London</a>.        </p>      </div>    </div>
+  <div class="row container">   <div class="one-third column tableau introduction">
+      <div class= "titlerow">     <h4 class="title">Wellbeing</h4>
+        <p class="description">These graphs illustrate how people rated their subjective well-being in each county and unitary authority. The data is collected and published by the Office for National Statistics. Respondents answered questions on a scale from 0 to 10 where 0 is 'not at all' and 10 is 'completely':        </p>
+        <ul class='bullets' >
+          <li>Overall, how satisfied are you with your life nowadays?</li>
+          <li>Overall, to what extent do you feel the things you do in your life are worthwhile?</li>
+          <li>Overall, how happy did you feel yesterday?</li>
+          <li>Overall, how anxious did you feel yesterday?</li>
+        </ul>
+        <p class="description">
+          For full details of how this data was collected and how it should be interpreted, see the <a href="http://www.ons.gov.uk/ons/guide-method/user-guidance/well-being/publications/index.html" target="_blank">ONS user guidance</a>, and the further information on the dataset pages themselves. </p> </div>  </div>
+
+    <div class="one-third column tableau wellbeing-barchart">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"wellbeing-barchart","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=wellbeing-barchart\u0026partial=tableau_wellbeing_barchart\u0026section=wellbeing"}
+      );
+      var currentTab = $('.tableau.wellbeing-barchart').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){tableau.doAjaxOnce();}
+
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.wellbeing').bind('click', function(e){tableau.doAjaxOnce();  });    });</script></div>
+    <div class="one-third column tableau wellbeing-highlow">
+    <div class="spinner"><img alt="Spinner 22" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript"> // when the page is ready, start loading the graph by ajax.
+    $(function(){    // make a tableau object.
+      var tableau = new ODC.Tableau(    // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"wellbeing-highlow","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=wellbeing-highlow\u0026partial=tableau_highlow_responses_chart\u0026section=wellbeing"}
+      );
+      var currentTab = $('.tableau.wellbeing-highlow').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){        tableau.doAjaxOnce();      }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.wellbeing').bind('click', function(e){       tableau.doAjaxOnce();      });    });</script></div>  </div>
+  <div class="row container">
+    <div class="one-third column tableau introduction">
+      <div class= "titlerow"><h4 class="title">Local Maps</h4>
+        <p class="description">DCLG have used ONS wellbeing data in combination with the Acorn geodemographic segmentation to <a href="http://opendatacommunities.org/resource?uri=http%3A%2F%2Fopendatacommunities.org%2Fdef%2Fconcept%2Ffolders%2Fthemes%2Fsocietal-wellbeing" target="_blank">model how wellbeing varies</a> amongst <a href="http://opendatacommunities.org/resource?uri=http%3A%2F%2Fopendatacommunities.org%2Fdata%2Flower-layer-super-output-areas" target="_blank">Lower Super Output areas</a>.  </p>
+        <p class="description">View this modelled data in our <a href="http://opendatacommunities.org/showcase/wellbeing">Wellbeing Map Explorer</a> or <a href="http://opendatacommunities-downloads.s3.amazonaws.com/dclg-modelled-lsoa-wellbeing-estimates.csv" target="_blank">download it in CSV format</a>.</p>      </div>    </div>
+<div class="one-third column tableau wellbeing-satisfaction-low-wellbeing">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){      // make a tableau object.
+      var tableau = new ODC.Tableau( // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"wellbeing-satisfaction-low-wellbeing","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=wellbeing-satisfaction-low-wellbeing\u0026partial=tableau_distro\u0026section=wellbeing\u0026theme_opts%5BCURVE_GRAD_COLOUR_ONE%5D=%23ff003d\u0026theme_opts%5BCURVE_GRAD_COLOUR_TWO%5D=%23f3c3d0"}
+      );
+      var currentTab = $('.tableau.wellbeing-satisfaction-low-wellbeing').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){        tableau.doAjaxOnce();      }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.wellbeing').bind('click', function(e){tableau.doAjaxOnce();      });    });</script></div>
+
+<div class="one-third column tableau wellbeing-worthwhile-low-wellbeing">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){      // make a tableau object.
+      var tableau = new ODC.Tableau(        // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"wellbeing-worthwhile-low-wellbeing","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=wellbeing-worthwhile-low-wellbeing\u0026partial=tableau_distro\u0026section=wellbeing\u0026theme_opts%5BCURVE_GRAD_COLOUR_ONE%5D=%23ffa300\u0026theme_opts%5BCURVE_GRAD_COLOUR_TWO%5D=%23fce7c3"}
+      );
+      var currentTab = $('.tableau.wellbeing-worthwhile-low-wellbeing').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){        tableau.doAjaxOnce();      }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.wellbeing').bind('click', function(e){       tableau.doAjaxOnce();      });    });</script></div>  </div>
+  <div class="row container">
+    <div class="one-third column tableau introduction">
+      <div class= "titlerow">
+        <h4 class="title">Other Resources</h4>
+        <p class="description">
+          See also the <a href="http://opendatacommunities.org/data" target="_blank">datasets</a>.  Each dataset contains documentation on the data it contains.
+        </p>
+        <p class="description">A range of organisations are actively working on wellbeing and have produced useful research and resources. We have highlighted a sample below:
+        </p>
+        <ul class='bullets'>
+          <li><a href="http://www.neweconomics.org/programmes/well-being" target="_blank">New Economics Foundation</a></li>
+          <li><a href="http://www.youngfoundation.org/our-work/wellbeing-and-resilience" target="_blank">Young Foundation</a></li>
+          <li><a href="http://www.oecd.org/statistics/measuringwell-beingandprogress.htm" target="_blank">OECD</a></li>
+          <li><a href="http://www.bis.gov.uk/foresight/our-work/projects/published-projects/mental-capital-and-wellbeing" target="_blank">Foresight Project on Mental Capital and Wellbeing</a></li>
+          <li><a href="http://www.neweconomics.org/publications/the-role-of-local-government-in-promoting-well-being" target="_blank">Role of Local Government in Promoting Wellbeing</a></li>
+        </ul>
+      </div>
+    </div>
+    
+<div class="one-third column tableau wellbeing-happiness-low-wellbeing">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript"> // when the page is ready, start loading the graph by ajax.
+    $(function(){ // make a tableau object.
+      var tableau = new ODC.Tableau( // the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"wellbeing-happiness-low-wellbeing","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=wellbeing-happiness-low-wellbeing\u0026partial=tableau_distro\u0026section=wellbeing\u0026theme_opts%5BCURVE_GRAD_COLOUR_ONE%5D=%23f9ff2e\u0026theme_opts%5BCURVE_GRAD_COLOUR_TWO%5D=%23fffdc3"}
+      );
+      var currentTab = $('.tableau.wellbeing-happiness-low-wellbeing').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){        tableau.doAjaxOnce();      }
+      // when the tab is clicked, if it's for the section that this tableau lives on,
+      // get the tableau via ajax (if we haven't already)
+      $('.tabs a.wellbeing').bind('click', function(e){        tableau.doAjaxOnce();      });    });</script></div>
+
+<div class="one-third column tableau wellbeing-anxiety-low-wellbeing">
+    <div class="spinner"><img alt="Spinner" src="img/spinner-22.gif" /></div>
+    
+<script type="text/javascript">// when the page is ready, start loading the graph by ajax.
+    $(function(){// make a tableau object.
+      var tableau = new ODC.Tableau(// the partial parameter is the partial to replace this whole div with.
+        {"graph_slug":"wellbeing-anxiety-low-wellbeing","url":"http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/westminster/tableau?graph_slug=wellbeing-anxiety-low-wellbeing\u0026partial=tableau_distro\u0026section=wellbeing\u0026theme_opts%5BCURVE_GRAD_COLOUR_ONE%5D=%23009bff\u0026theme_opts%5BCURVE_GRAD_COLOUR_TWO%5D=%23c7e5fd"}
+      );
+      var currentTab = $('.tableau.wellbeing-anxiety-low-wellbeing').closest('.tabbed');// grab the current tab.
+      // if it's visible when we start, just do the ajax get.
+      if (currentTab.is(":visible")){        tableau.doAjaxOnce();      }
+      // when tab is clicked, if it's for the section that this tableau lives on, get tableau via ajax (if we haven't already)
+      $('.tabs a.wellbeing').bind('click', function(e){       tableau.doAjaxOnce();      });    });
+</script></div>  </div></section>
+<script type="text/javascript">console.log('wiring legend')
+  $(function() {// wire up all future a.legends to the click (wellbeing)
+    $(document).on("click", "#wellbeing a.distro-legend", function(e) { e.preventDefault();
+      $("#splash").dialog({ modal: true, width: 320, title: "Legend"}); // width allows for ui dialog padding
+      $("#splash").html("<div class=\"one-third column tableau key\" style=\"margin-top:24px; padding-bottom:24px;\">\n    <div class= \"titlerow\">\n  <h4 class=\"title\">Key to figures<\/h4>\n  <p class=\"description\">\n    The curve shows the national distibution. Hover over the graph for limit values.\n  <\/p>\n<\/div>\n<div>\n  <div class=\"bignumber\">\n        <h2>value<\/h2>\n      <h3>shown by bar<\/h3>\n  <\/div>\n<\/div>\n<div class=\"distribution legend-with-conf\">\n  <noscript>\n    JavaScript is required to view the charts.\n  <\/noscript>\n  <div class=\"tip min\" style=\"display:none;\"><\/div>?\n  <div class=\"tip max\" style=\"display:none;\"><\/div>?\n<\/div><div class=\"average\">\n  National average:\n    <strong>shown by smaller arrow<\/strong>\n<\/div>\n\n\n<script type=\'text/javascript\'>\n  // runs on document ready.\n  $(function(){\n\n    // draw the distribution for this value\n    var distro = new ODC.Distribution(\n      \'legend-with-conf\',\n      {\"max\":100,\"min\":10.0,\"mean\":30,\"distribution\":[[\"10.0\",0],[\"20.0\",95],[\"30\",145],[\"40\",57],[\"50\",17],[\"60\",6],[\"70\",3],[\"80\",0],[\"90\",0],[\"100\",0]],\"heading\":\"Key to figures\",\"context\":\"shown by bar\",\"description\":\"The curve shows the national distibution. Hover over the graph for limit values.\",\"sourcelink\":\"\\\"#\\\"\",\"quantity\":\"30\",\"format_str\":\"%6.0f\"},\n      true, // annotate?\n      {});\n\n    function draw(){\n      distro.drawDistribution();\n      distro.addValueLine(\'30.0\', \'#eee\', [25, 35]);\n    }\n\n    draw();\n\n    $(window).bind(\'resizestop\', function (e) {\n       distro.reInit();\n       draw();\n    });\n\n    // Also, when tabbing to this tab, redraw the distribution curves.\n    // This fixes the case where the draw happens when the tab is not visible (by tabbing away during ajax get), in which case it thinks the width is 0!\n    $(\'.tabs a.legend\').bind(\'click\', function(e){\n       distro.reInit();\n       draw();\n    });\n  });\n<\/script>\n\n\n<\/div>");
+    });  });</script>
+<section id="geo" class="tabbed"><div class="row container">
+    <div class="sixteen columns introduction"><div class="titlerow"><h3 style="text-transform:none;" class="title">Westminster <a href="http://opendatacommunities.org/resource?uri=http%3A%2F%2Fopendatacommunities.org%2Fid%2Flondon-borough-council%2Fwestminster"target="_blank">[Source]</a></h3>
+             </div>     </div>  </div>
+  <div class="row container"> <div class="two-thirds column tableau map">  <div class="map-container">
+        <h4 class="title">Area Governed</h4>
+        <div class="busy-notice-wrapper" style="display:block; z-index:9999; position:relative; height:40px; width:260px; top:415px; left:80px;">
+          <div id="busy-notice" style="float:left; background:#eee; color:black; border-radius:3px; border: 1px solid #ddd; box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 3px; padding:7px 10px 5px 9px; min-width:190px;">
+            <img alt="Smallspinner" src="img/smallspinner-22.gif" style="float:left;" />
+            <div class="words" style='float:left; padding-left:8px; margin-top:-1px;'>Fetching boundary data...</div>
+          </div>
+        </div>
+        <div id="map-canvas" style="width:100%; height:460px; top:-40px;  margin-top:8px;">You need JavaScript to view the map.</div>
+      </div>
+    </div>
+
+    <div class="one-third column tableau"><div class= "titlerow">
+          <h3 style="text-transform:none;" class="title">Part of <a href="http://opendatacommunities.org/sparql?query=SELECT+%3Fcounty+WHERE+%7B%3Chttp%3A%2F%2Fopendatacommunities.org%2Fid%2Flondon-borough-council%2Fwestminster%3E+%3Chttp%3A%2F%2Fopendatacommunities.org%2Fdef%2Flocal-government%2Fcounty%3E+%3Fcounty%7D" target="_blank">[Source]</a></h3>
+          <ul><li><a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london/inner-london#geo" target="_blank">Inner London</a></li></ul>
+            <h3 style="text-transform:none;" class="title">Touches <a href="http://opendatacommunities.org/sparql?query=PREFIX+geo%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23%3E%0A++PREFIX+gov%3A+%3Chttp%3A%2F%2Fopendatacommunities.org%2Fdef%2Flocal-government%2F%3E%0A++PREFIX+spatial%3A+%3Chttp%3A%2F%2Fdata.ordnancesurvey.co.uk%2Fontology%2Fspatialrelations%2F%3E%0A%0A++select+%3Fneighbour+where+%7B%0A++%3Chttp%3A%2F%2Fopendatacommunities.org%2Fid%2Flondon-borough-council%2Fwestminster%3E+gov%3Agoverns+%3Farea+.%0A++%3Farea+spatial%3Atouches+%3Ftouching+.%0A++%3Ftouching+gov%3AisGovernedBy+%3Fneighbour+.%0A++%7D" target="_blank">[Source]</a></h3>
+            <ul>
+                <li><a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/camden#geo" target="_blank">Camden</a> </li>
+                <li><a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/brent#geo" target="_blank">Brent</a> </li>
+                <li><a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/city-of-london#geo" target="_blank">City of London</a> </li>
+                <li><a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/lambeth#geo" target="_blank">Lambeth</a> </li>
+                <li><a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/kensington-and-chelsea#geo" target="_blank">Kensington and Chelsea</a> </li>
+                <li><a href="http://apps.opendatacommunities.org/showcase/dashboard/local_authorities/london-borough-council/wandsworth#geo" target="_blank">Wandsworth</a> </li>
+            </ul>
+
+      </div>    </div>  </div>
+<script type='text/javascript'>$(function() {var map; var mapDrawn=false;// for drawing geographic boundary.
+function drawMap() {if(!mapDrawn){mapDrawn=true;
+map=new google.maps.Map(document.getElementById("map-canvas"), {zoom: 12,
+	center: new google.maps.LatLng(51.511716,-0.152918), // Westminster
+	mapTypeId: google.maps.MapTypeId.SATELLITE,  streetViewControl: false });
+
+	function drawPoly(dataCoords, polyType){var polyPaths = [];    // little in-closure helper
+		function addToPaths(polyCoords) {$.each(polyCoords, function(i, coordinatesArray) {
+			// push a google lat long array into our polyPaths.
+			polyPaths.push($.map(coordinatesArray,function(lngLat){return new google.maps.LatLng(lngLat[1],lngLat[0]);}));});};
+
+		if (polyType == "MultiPolygon") {$.each( dataCoords, function(i, polyCoords) {addToPaths(polyCoords); });  } 
+			else {addToPaths(dataCoords); }
+
+		var poly = new google.maps.Polygon({paths: polyPaths, strokeColor: '#555',  strokeOpacity: 0.4,
+			strokeWeight: 2,  fillColor: 'red', fillOpacity: 0.5 });  
+		poly.setMap(map);    
+	}
+
+$.ajax({url: 'data/la-bounds-westminster.json',  timeout: 10000,   dataType: 'json',
+		success: function(data, textStatus, jqXHR){drawPoly(data.coordinates, data.type); $('#busy-notice').hide();  }  }); } }
+// if it's visible when we start, just do the ajax get.
+if ($('section#geo.tabbed').is(":visible")){drawMap();}
+// when the tab is clicked, get the tableau via ajax (if we haven't already)
+$('.tabs a.geo').bind('click', function(e){drawMap(); }); });</script></section></article></body></html>

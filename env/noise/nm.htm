@@ -1,0 +1,76 @@
+<!DOCTYPE HTML><html><head><title>Noise Pollution</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="" /><meta name="keywords" content="" />
+<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+<script src="js/jquery.min.js"></script>
+<noscript><link rel="stylesheet" href="css/skel.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" /></noscript>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+<script src="js/promise.js"></script><script src="js/GeoJSON.js"></script><script src="js/ajax.js"></script>
+<script src="js/touchhover.js"></script><style>
+body,html,#map {width: 100%;height: 100%;}
+#osc {background-image:url(images/osc2.png); background-size: 150px 162px; background-repeat:no-repeat; position: absolute;
+			bottom: 10px;left: 5px;}
+#logo {position: absolute;bottom: 10px;left: 160px;padding: 6px 8px;background: white;background: rgba(255,255,255,0.8);box-shadow: 0 0 15px rgba(0,0,0,0.2);border-radius: 5px;}
+.info {padding: 6px 8px;font: 14px/16px Arial, Helvetica, sans-serif;background: white;background: rgba(255,255,255,0.8);box-shadow: 0 0 15px rgba(0,0,0,0.2);border-radius: 5px;}
+.info h4 {margin: 0 0 5px;color: #777;}
+.legend {text-align: left;line-height: 18px;color: #555;}
+.legend i {width: 18px;height: 18px;float: left;margin-right: 8px;opacity: 0.7;}
+body {background-color: black;margin: 0;}
+h2 {color: #ffffff;font-family: "Arial"}
+.leaflet-control-touchhover-toggled {box-shadow: 0px 0px 8px 8px rgba(0, 255, 17, 0.75);-moz-box-shadow: 0px 0px 8px 8px rgba(0, 255, 17, 0.75);-webkit-box-shadow: 0px 0px 8px 8px rgba(0, 255, 17, 0.75);}</style>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]--></head><body>
+<div id="map"></div><div id="osc"><canvas id="mycanvas" width="150" height="160"></canvas></div>
+<script type="text/javascript">audio = new Audio("audio/traffic.mp3");
+var map = L.map('map', {zoomControl: false}).setView([51.5132222, -0.1352222], 16); //soho
+// Disable drag and zoom handlers.
+map.dragging.disable();	map.touchZoom.disable();map.doubleClickZoom.disable();	map.scrollWheelZoom.disable();
+map.attributionControl.setPrefix(false); //turn off prefix to allow target blank to be used on leaflet link
+L.tileLayer('https://{s}.tiles.mapbox.com/v3/jozzajozza.nojen9og/{z}/{x}/{y}.png', {
+attribution: 'Chris Setz <a href="http://leafletjs.com" target="_blank">Leaflet</a> | Open Data <a href="https://data.gov.uk/dataset/road-noise-laeq-16h-england-round-2" target="_blank">data.gov.uk</a> | Imagery & Sound <a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox &copy; OpenStreetMap</a> and <a href="http://www.freesfx.co.uk" target="_blank">freeSFX</a> All credit to <a href="http://www.emu-analytics.com/blog/post.php?s=2016-01-11-2-for-the-price-of-1" target="_blank">Emu Analytics</a>'}).addTo(map);
+if (L.Browser.touch) {L.control.touchHover().addTo(map);} //touch hover control
+var info = L.control();// control that shows state info on hover
+info.onAdd = function (map) {this._div = L.DomUtil.create('div', 'info');this.update();return this._div;};
+info.update = function (props) {this._div.innerHTML = '<h4>Average Major Road & Rail Noise Levels (0700 to 2300)</h4>' +  (props ? '<b>' + props.NoiseClass + ' dB(A)</b>' : 'Hover over a noise segment & turn up the volume');};
+info.addTo(map);
+//Get color depending on dB bucket
+function getColor(a) {return a == ">=75.0" ? '#FF3300' : a == "70.0-74.9"  ? '#FF9900' : a == "65.0-69.9"  ? '#FFFF00' :
+           a == "60.0-64.9"  ? '#66FF33' : a == "55.0-59.9"  ? '#66FFFF' : '#66FFFF';}
+//Get volume and amp depending on dB bucket
+function getVamp(a) {return a == ">=75.0" ? 1 : a == "70.0-74.9"  ? 0.8 : a == "65.0-69.9"  ? 0.6 :  a == "60.0-64.9"  ? 0.4 :
+           a == "55.0-59.9"  ? 0.2 :  0;}
+//Highlight feature control with added noise effects
+function highlightFeature(e) {var layer = e.target; layer.setStyle({weight: 1,color: '#000',dashArray: '',fillOpacity: 0.8});
+if (!L.Browser.ie && !L.Browser.opera) {layer.bringToFront();}
+info.update(layer.feature.properties);
+//Use html 5 audio element to add in the traffic track and control its volume via the % population value
+audio.volume=getVamp(layer.feature.properties.NoiseClass); if (audio.paused) {audio.play();};
+//Call the OnDraw function to create the oscillating effect
+refreshIntervalId=setInterval(OnDraw, 1);time=0; amplitude=getVamp(layer.feature.properties.NoiseClass)*45;	}
+//Reset the effects on mouseout
+function resetHighlight(e) {geojson.resetStyle(e.target);info.update();audio.pause(); //paused to deal with some lag 
+clearInterval(refreshIntervalId); dataLine.clearRect(0, 0, canvas.width, canvas.height); }
+function zoomToFeature(e) {map.fitBounds(e.target.getBounds());}
+function onEachFeature(feature, layer) {layer.on({mouseover: highlightFeature,	mouseout: resetHighlight, click: zoomToFeature});}
+//Function to draw a sine wave on the canvas
+function OnDraw() {time = time + 0.2; color="#00FF00"; canvas = document.getElementById("mycanvas");
+dataLine = canvas.getContext("2d"); value = 10;
+dataLine.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
+dataLine.beginPath();
+for(cnt = 12; cnt <= canvas.width * 0.94; cnt++) // loop through canvas coordinates
+	{dataLine.lineTo(cnt, canvas.height * 0.378 - (Math.cos(time + cnt * 0.05) * 1.0 * amplitude));} // draw point of wave at each
+dataLine.lineWidth = value.value * 0.1;	dataLine.strokeStyle = color;dataLine.stroke();}
+//Use omnivore (add custom layer first to deal with styles and hover over events)
+var customLayer = L.geoJson(null, {style: function style(feature) {return {weight: 0,color: 'white',dashArray: '3',fillOpacity: 0.5,fillColor: getColor(feature.properties.NoiseClass)	};}, onEachFeature: onEachFeature});
+var geojson=new omnivore.topojson("../../data/smoothtopo_central_simp84_2.json", null, customLayer); geojson.addTo(map);
+var legend=L.control({position: 'bottomright'}); //Add in legend
+legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'info legend'),
+	grades = ["55.0-59.9", "60.0-64.9", "65.0-69.9", "70.0-74.9", ">=75.0"],
+	labels = ['Road & Rail Noise' + '</br>' + 'Levels dB(A)'],from, to;	
+	for (var i=0; i<grades.length; i++) 
+		{from=grades[i];to=grades[i + 1];labels.push('<i style="background:'+ getColor(from) + '"></i> ' +	from);}
+	div.innerHTML = labels.join('<br>');
+	return div;};
+legend.addTo(map);</script></body></html>

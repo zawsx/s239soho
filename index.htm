@@ -1,0 +1,122 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>around soho</title>
+<meta name="author" content="Chris Setz" /><meta name="description" content="around soho" />
+<meta name="keywords"  content="soho" /><meta name="Resource-type" content="Document" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400,700" />
+<link rel="stylesheet" type="text/css" href="css/jq.pp.css" /><link rel="stylesheet" type="text/css" href="css/style.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/jq.pp.min.js"></script>
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+<script src="js/promise.js"></script><script src="js/GeoJSON.js"></script><script src="js/ajax.js"></script>
+<script src="js/touchhover.js"></script><style>
+#map {width: 100%;height: 100%;}
+#osc {background-image:url(images/osc2.png); background-size: 150px 162px; background-repeat:no-repeat; position: absolute;
+			bottom: 10px;left: 5px;}
+.info {padding: 6px 8px;font: 14px/16px Arial, Helvetica, sans-serif;background: white;background: rgba(255,255,255,0.8);box-shadow: 0 0 15px rgba(0,0,0,0.2);border-radius: 5px;}
+.info h4 {margin: 0 0 5px;color: #777;}
+.legend {text-align: left;line-height: 18px;color: #555;}
+.legend i {width: 18px;height: 18px;float: left;margin-right: 8px;opacity: 0.7;}
+body {background-color: black;margin: 0;}
+h2 {color: #ffffff;font-family: "Arial"}
+.leaflet-control-touchhover-toggled {box-shadow: 0px 0px 8px 8px rgba(0, 255, 17, 0.75);-moz-box-shadow: 0px 0px 8px 8px rgba(0, 255, 17, 0.75);-webkit-box-shadow: 0px 0px 8px 8px rgba(0, 255, 17, 0.75);}</style>
+
+<script type="text/javascript">$(document).ready(function() {/* Plugin intialization*/
+$('#pagepiling').pagepiling({menu: '#menu',anchors: ['page1', 'page2', 'page3', 'page4'],
+sectionsColor: ['white', '#ee005a', '#2C3E50', '#39C'],
+navigation: {'position': 'right','tooltips': ['Page 1', 'Page 2', 'Page 3', 'Page 4']},
+afterRender: function(){$('#pp-nav').addClass('custom');},
+afterLoad: function(anchorLink, index){if(index>1){$('#pp-nav').removeClass('custom');}else{$('#pp-nav').addClass('custom');}}});
+/* Internal use */
+$('#showExamples').click(function(e){e.stopPropagation();e.preventDefault();$('#examplesList').toggle();});
+$('html').click(function(){$('#examplesList').hide();});   });</script>
+<script type="text/javascript">audio = new Audio("audio/traffic.mp3");
+var map = L.map('map', {zoomControl: false}).setView([51.5132222, -0.1352222], 16); //soho
+// Disable drag and zoom handlers.
+map.dragging.disable();	map.touchZoom.disable();map.doubleClickZoom.disable();	map.scrollWheelZoom.disable();
+map.attributionControl.setPrefix(false); //turn off prefix to allow target blank to be used on leaflet link
+L.tileLayer('https://{s}.tiles.mapbox.com/v3/jozzajozza.nojen9og/{z}/{x}/{y}.png', {
+attribution: 'Chris Setz <a href="http://leafletjs.com" target="_blank">Leaflet</a> | Open Data <a href="https://data.gov.uk/dataset/road-noise-laeq-16h-england-round-2" target="_blank">data.gov.uk</a> | Imagery & Sound <a href="https://www.mapbox.com/about/maps/" target="_blank">&copy; Mapbox &copy; OpenStreetMap</a> and <a href="http://www.freesfx.co.uk" target="_blank">freeSFX</a> All credit to <a href="http://www.emu-analytics.com/blog/post.php?s=2016-01-11-2-for-the-price-of-1" target="_blank">Emu Analytics</a>'}).addTo(map);
+if (L.Browser.touch) {L.control.touchHover().addTo(map);} //touch hover control
+var info = L.control();// control that shows state info on hover
+info.onAdd = function (map) {this._div = L.DomUtil.create('div', 'info');this.update();return this._div;};
+info.update = function (props) {this._div.innerHTML = '<h4>Average Major Road & Rail Noise Levels (0700 to 2300)</h4>' +  (props ? '<b>' + props.NoiseClass + ' dB(A)</b>' : 'Hover over a noise segment & turn up the volume');};
+info.addTo(map);
+//Get color depending on dB bucket
+function getColor(a) {return a == ">=75.0" ? '#FF3300' : a == "70.0-74.9"  ? '#FF9900' : a == "65.0-69.9"  ? '#FFFF00' :
+           a == "60.0-64.9"  ? '#66FF33' : a == "55.0-59.9"  ? '#66FFFF' : '#66FFFF';}
+//Get volume and amp depending on dB bucket
+function getVamp(a) {return a == ">=75.0" ? 1 : a == "70.0-74.9"  ? 0.8 : a == "65.0-69.9"  ? 0.6 :  a == "60.0-64.9"  ? 0.4 :
+           a == "55.0-59.9"  ? 0.2 :  0;}
+//Highlight feature control with added noise effects
+function highlightFeature(e) {var layer = e.target; layer.setStyle({weight: 1,color: '#000',dashArray: '',fillOpacity: 0.8});
+if (!L.Browser.ie && !L.Browser.opera) {layer.bringToFront();}
+info.update(layer.feature.properties);
+//Use html 5 audio element to add in the traffic track and control its volume via the % population value
+audio.volume=getVamp(layer.feature.properties.NoiseClass); if (audio.paused) {audio.play();};
+//Call the OnDraw function to create the oscillating effect
+refreshIntervalId=setInterval(OnDraw, 1);time=0; amplitude=getVamp(layer.feature.properties.NoiseClass)*45;	}
+//Reset the effects on mouseout
+function resetHighlight(e) {geojson.resetStyle(e.target);info.update();audio.pause(); //paused to deal with some lag 
+clearInterval(refreshIntervalId); dataLine.clearRect(0, 0, canvas.width, canvas.height); }
+function zoomToFeature(e) {map.fitBounds(e.target.getBounds());}
+function onEachFeature(feature, layer) {layer.on({mouseover: highlightFeature,	mouseout: resetHighlight, click: zoomToFeature});}
+//Function to draw a sine wave on the canvas
+function OnDraw() {time = time + 0.2; color="#00FF00"; canvas = document.getElementById("mycanvas");
+dataLine = canvas.getContext("2d"); value = 10;
+dataLine.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
+dataLine.beginPath();
+for(cnt = 12; cnt <= canvas.width * 0.94; cnt++) // loop through canvas coordinates
+	{dataLine.lineTo(cnt, canvas.height * 0.378 - (Math.cos(time + cnt * 0.05) * 1.0 * amplitude));} // draw point of wave at each
+dataLine.lineWidth = value.value * 0.1;	dataLine.strokeStyle = color;dataLine.stroke();}
+//Use omnivore (add custom layer first to deal with styles and hover over events)
+var customLayer = L.geoJson(null, {style: function style(feature) {return {weight: 0,color: 'white',dashArray: '3',fillOpacity: 0.5,fillColor: getColor(feature.properties.NoiseClass)	};}, onEachFeature: onEachFeature});
+var geojson=new omnivore.topojson("data/smoothtopo_central_simp84_2.json", null, customLayer); geojson.addTo(map);
+var legend=L.control({position: 'bottomright'}); //Add in legend
+legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'info legend'),
+	grades = ["55.0-59.9", "60.0-64.9", "65.0-69.9", "70.0-74.9", ">=75.0"],
+	labels = ['Road & Rail Noise' + '</br>' + 'Levels dB(A)'],from, to;	
+	for (var i=0; i<grades.length; i++) 
+		{from=grades[i];to=grades[i + 1];labels.push('<i style="background:'+ getColor(from) + '"></i> ' +	from);}
+	div.innerHTML = labels.join('<br>');
+	return div;};
+legend.addTo(map);</script>
+<style>#section1 h1{color: #444;}	#section1 p{color: #333;color: rgba(0,0,0,0.3);} #section1 img{margin: 20px 0;opacity: 0.7;}
+#section2 h1, #section2 p{z-index: 3;} #section2 p{opacity: 0.8;} #section2 #colors{right: 60px;bottom: 0;	position: absolute;
+		height: 413px;	width: 258px;	background-image: url(img/colors.gif);	background-repeat: no-repeat;}
+#section3 #colors{left: 60px;bottom: 0;}	#section3 p{color: #757575;}	
+#colors2,#colors3{position: absolute;height: 163px;width: 362px;z-index: 1;	background-repeat: no-repeat;
+		left: 0;	margin: 0 auto;	right: 0;} #colors2{background-image: url(img/colors2.gif);top:0;} 
+#colors3{background-image: url(img/colors3.gif);	bottom:0;} #section4 p{opacity: 0.6;}
+/* Overwriting fullPage.js tooltip color */#pp-nav.custom .pp-tooltip{color: #AAA;}
+#markup{display: block;width: 450px;margin: 20px auto;	text-align: left;}</style></head><body>
+<ul id="menu"><li data-menuanchor="page1" class="active"><a href="#page1">intro</a></li>
+<li data-menuanchor="page2"><a href="#page2">environment</a></li><li data-menuanchor="page3"><a href="#page3">Page 3</a></li>
+<li data-menuanchor="page4"><a href="#page4">Page 4</a></li></ul><div id="pagepiling">
+<div class="section" id="section1"><h1>around soho</h1>
+			<p>commercial working group - evidence base</p><img src="img/pagePiling-plugin.gif" alt="pagePiling" /><br /></div>
+			
+<div class="section" id="section2"><div class="intro"><div id="colors"></div>
+<div id="map"></div><div id="osc"><canvas id="mycanvas" width="150" height="160"></canvas></div>
+	    	</div>
+</div>
+
+<div class="section" id="section3">
+	    	<div class="intro">
+	    		<h1>Configurable</h1>
+	    		<p>Plenty of options, methods and callbacks to use.</p>
+	    		<div id="colors2"></div>
+	    		<div id="colors3"></div>
+	    	</div>
+</div>
+	    
+<div class="section" id="section4">
+	    	<div class="intro">
+	    		<h1>Compatible</h1>
+	    		<p>Designed to work on tablet and mobile devices.</p>
+	    		<p>Oh! And its compatible with old browsers such as IE 8 or Opera 12!</p>
+	    	</div>
+</div>
+</div></body></html>
